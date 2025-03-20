@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    </head>
+    <body>
+        <header>
+            <div class="heady">
+                <img src="https://i.pinimg.com/736x/16/de/d1/16ded160f74e9983411aefd95d9c00c3.jpg" alt="my image" height="100px">
+                <h1 id="th">FORM</h1>
+            </div>
+        </header>
+        <main>
+            <form action="/html" method="POST">
+            <fieldset class="mainf">
+                <fieldset class="ff">
+                    <div class="personal">
+                        <h2 id="sh"><b>1.Personal Information-</b></h2>
+                        <br>
+                        <p class="theory">Full Name:</p>
+                        <input type="text" name="fullname" class="inputs" id="fname" placeholder="Enter full Name">
+                        <br>
+                        <p class="theory">Email Address:</p>
+                        <input class="inputs" type="email" name="email" id="email" placeholder="Enter Email Address">
+                        <br>
+                        <p class="theory">Phone Number:</p>
+                        <input type="tel" name="phoneNo" class="inputs" id="phno" placeholder="Enter Mobile Number">
+                    </div>
+                    <br>
+                    <br>
+                    <button type="submit">SUBMIT</button>
+                </fieldset>
+            </form>
+            <div class="datapart">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Sno</th>
+                            <th>Full Name</th>
+                            <th>Email ID</th>
+                            <th>Phone Number</th>
+                            <th>Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for form in myans %}
+                        <tr>
+                            <th scope="row">{{loop.index}}</th>
+                            <td>{{form.fname}}</td>
+                            <td>{{form.email}}</td>
+                            <td>{{form.phno}}</td>
+                            <td>{{form.date_created}}</td>
+                        </tr>  
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </fieldset>
+        </main>
+        <script src="" async defer></script>
+    </body>
+</html>

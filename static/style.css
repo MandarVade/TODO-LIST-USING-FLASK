@@ -1,0 +1,408 @@
+/* Reset and dark theme base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  body {
+    background-color: #121212;
+    background-image: 
+      radial-gradient(circle at 10% 20%, rgba(50, 50, 50, 0.2) 0%, transparent 20%),
+      radial-gradient(circle at 80% 70%, rgba(50, 50, 50, 0.2) 0%, transparent 20%);
+    min-height: 100vh;
+    padding: 40px 20px;
+    color: #e0e0e0;
+  }
+  
+  /* Header styles with neon glow effect */
+  header {
+    margin-bottom: 30px;
+  }
+  
+  .heady {
+    background-color: rgba(30, 30, 30, 0.95);
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+    border-left: 4px solid #0ff;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .heady::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.05), transparent);
+    transform: translateX(-100%);
+    animation: scanline 5s infinite linear;
+  }
+  
+  @keyframes scanline {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+  
+  .heady img {
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    filter: grayscale(80%) brightness(0.9);
+    border: 1px solid #333;
+  }
+  
+  .heady img:hover {
+    transform: scale(1.05) rotate(-2deg);
+    filter: grayscale(0%) brightness(1.1);
+    box-shadow: 0 8px 25px rgba(0, 255, 255, 0.3);
+  }
+  
+  #th {
+    color: #fff;
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    transition: text-shadow 0.3s;
+  }
+  
+  #th:hover {
+    text-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
+  }
+  
+  /* Main form styles */
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  
+  .mainf {
+    border: none;
+    padding: 0;
+  }
+  
+  .ff {
+    background-color: rgba(25, 25, 25, 0.95);
+    border-radius: 8px;
+    padding: 30px;
+    border: none;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    margin-bottom: 30px;
+    position: relative;
+    border-top: 1px solid #333;
+    border-bottom: 1px solid #333;
+    transform: translateY(20px);
+    opacity: 0;
+    animation: slideUp 0.6s forwards 0.2s;
+  }
+  
+  @keyframes slideUp {
+    0% { transform: translateY(20px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+  }
+  
+  .personal {
+    margin-bottom: 20px;
+  }
+  
+  #sh {
+    color: #0ff;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 10px;
+    letter-spacing: 1px;
+  }
+  
+  #sh::after {
+    content: '';
+    position: absolute;
+    width: 60px;
+    height: 2px;
+    background: #0ff;
+    bottom: 0;
+    left: 0;
+    box-shadow: 0 0 10px #0ff;
+  }
+  
+  .theory {
+    margin: 15px 0 8px;
+    font-weight: 500;
+    color: #bbb;
+    letter-spacing: 0.5px;
+    transition: color 0.3s;
+  }
+  
+  .inputs {
+    width: 100%;
+    padding: 15px;
+    background-color: rgba(30, 30, 30, 0.8);
+    border: 1px solid #333;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #e0e0e0;
+    transition: all 0.3s;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .inputs:focus {
+    border-color: #0ff;
+    box-shadow: 0 0 0 2px rgba(0, 255, 255, 0.2), inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    outline: none;
+    background-color: rgba(35, 35, 35, 0.9);
+  }
+  
+  .inputs::placeholder {
+    color: #666;
+  }
+  
+  /* Label animation for focused fields */
+  .inputs:focus + .theory,
+  .inputs:not(:placeholder-shown) + .theory {
+    color: #0ff;
+  }
+  
+  /* Button styles with pulse effect */
+  button[type="submit"] {
+    background-color: #222;
+    color: #0ff;
+    border: 1px solid #0ff;
+    padding: 15px 30px;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    margin-top: 20px;
+    animation: pulse 2s infinite;
+  }
+  
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(0, 255, 255, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(0, 255, 255, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(0, 255, 255, 0); }
+  }
+  
+  button[type="submit"]:hover {
+    background-color: rgba(0, 255, 255, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 255, 255, 0.4);
+  }
+  
+  button[type="submit"]::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.2), transparent);
+    transition: 0.5s;
+  }
+  
+  button[type="submit"]:hover::before {
+    left: 100%;
+  }
+  
+  button[type="submit"]:active {
+    transform: translateY(0);
+  }
+  
+  /* Data table styles with terminal look */
+  .datapart {
+    overflow-x: auto;
+    margin-top: 40px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideUp 0.6s forwards 0.4s;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse:separate;
+    background-color: rgba(20, 20, 20, 0.95);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  }
+  
+  table th, table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #333;
+  }
+  
+  table th {
+    background-color: #111;
+    color: #0ff;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 14px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  }
+  
+  table tr {
+    transition: all 0.3s;
+  }
+  
+  table tbody tr {
+    position: relative;
+  }
+  
+  table tbody tr::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 0;
+    background-color: rgba(0, 255, 255, 0.05);
+    z-index: 0;
+    transition: width 0.3s ease-out;
+  }
+  
+  table tbody tr:hover::after {
+    width: 100%;
+  }
+  
+  table tbody tr:nth-child(even) {
+    background-color: rgba(30, 30, 30, 0.7);
+  }
+  
+  /* Typing animation for form focus */
+  @keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+  }
+  
+  .inputs:focus {
+    border-right: 2px solid #0ff;
+    animation: blink-caret 0.75s step-end infinite;
+  }
+  
+  @keyframes blink-caret {
+    from, to { border-right-color: transparent }
+    50% { border-right-color: #0ff }
+  }
+  
+  /* Matrix-like digital rain effect in background (subtle) */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background: radial-gradient(ellipse at bottom, rgba(0, 40, 40, 0.1) 0%, rgba(0, 0, 0, 0) 70%);
+    z-index: -1;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .heady {
+      flex-direction: column;
+      text-align: center;
+    }
+    
+    #th {
+      font-size: 1.8rem;
+    }
+    
+    .ff {
+      padding: 20px;
+    }
+    
+    #sh::after {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+  
+  /* Form input focus glow effect */
+  .personal:hover .theory {
+    text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
+  }
+  
+  /* Add a cool glitch effect to the header on hover */
+  .heady:hover #th {
+    animation: glitch 1s linear;
+  }
+  
+  @keyframes glitch {
+    2%, 64% {
+      transform: translate(2px, 0) skew(0deg);
+    }
+    4%, 60% {
+      transform: translate(-2px, 0) skew(0deg);
+    }
+    62% {
+      transform: translate(0, 0) skew(5deg);
+    }
+  }
+  
+  .heady:hover:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 255, 255, 0.05);
+    animation: glitchBg 2s linear;
+  }
+  
+  @keyframes glitchBg {
+    0% { 
+      background-position: 0 0;
+      filter: hue-rotate(0deg);
+    }
+    10% { 
+      background-position: 5px 0;
+    }
+    20% { 
+      background-position: -5px 0;
+    }
+    30% { 
+      background-position: 15px 0;
+    }
+    40% { 
+      background-position: 5px 0;
+    }
+    50% { 
+      background-position: -25px 0;
+    }
+    60% { 
+      background-position: -50px 0;
+    }
+    70% { 
+      background-position: 0 -20px;
+    }
+    80% { 
+      background-position: -60px -20px;
+    }
+    81% { 
+      background-position: 0 0;
+    }
+    100% { 
+      background-position: 0 0;
+      filter: hue-rotate(360deg);
+    }
+  }
