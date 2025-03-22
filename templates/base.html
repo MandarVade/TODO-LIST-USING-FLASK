@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>
+        TODO LIST
+        {% block title %}
+            
+        {% endblock title %}
+
+    </title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <header>
+        <div class="heady">
+            <img src="https://i.pinimg.com/736x/16/de/d1/16ded160f74e9983411aefd95d9c00c3.jpg" alt="Logo"
+                height="100px">
+            <h1 id="th">UPDATE TODO LIST</h1>
+        </div>
+    </header>
+    {% block mainy %}
+        
+    {% endblock mainy %}
+</body>
+</html>

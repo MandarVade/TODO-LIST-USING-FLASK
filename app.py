@@ -41,5 +41,21 @@ def delete_entry(id):
         db.session.commit()
     return redirect("/html")
 
+@app.route("/update/<int:id>" ,methods=['GET', 'POST'])
+def update(id):
+    if request.method=='POST':
+        full_name = request.form['fullname']
+        email = request.form['email']
+        phone_number = request.form['phoneNo']
+        entry = form.query.filter_by(id=id).first()
+        entry.full_name=full_name
+        entry.email=email
+        entry.phone_number=phone_number
+        db.session.add(entry)
+        db.session.commit()
+        return redirect("/html")
+    entry = form.query.filter_by(id=id).first()
+    return render_template('update.html', entry=entry)
+    
 if __name__ == "__main__":
     app.run(debug=True)

@@ -1,23 +1,5 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>TODO List</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-
-<body>
-    <header>
-        <div class="heady">
-            <img src="https://i.pinimg.com/736x/16/de/d1/16ded160f74e9983411aefd95d9c00c3.jpg" alt="Logo"
-                height="100px">
-            <h1 id="th">TODO LIST</h1>
-        </div>
-    </header>
+{% extends 'base.html' %}
+{% block mainy %}
     <main>
         <form action="/html" method="POST">
             <fieldset class="mainf">
@@ -44,7 +26,7 @@
         </form>
         <div class="datapart">
             {% if entries|length==0 %}
-            
+
             NO ENTRIES
 
             {% else %}
@@ -68,7 +50,7 @@
                         <td>{{ entry.phone_number }}</td>
                         <td>{{ entry.date_created }}</td>
                         <td class="btns">
-                            <button onclick="window.location.href='/edit/{{ entry.id }}'">Edit</button>
+                            <button onclick="window.location.href='/update/{{ entry.id }}'">Edit</button>
                             <button onclick="window.location.href='/delete/{{ entry.id }}'">Delete</button>
                             <button onclick="window.location.href='/markdone/{{ entry.id }}'">Mark Done</button>
                         </td>
@@ -79,6 +61,4 @@
             {% endif %}
         </div>
     </main>
-</body>
-
-</html>
+{% endblock mainy %}
