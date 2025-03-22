@@ -1,12 +1,13 @@
 {% extends 'base.html' %}
+{% block heading %}
+    TODO LIST
+{% endblock heading %}
 {% block mainy %}
     <main>
         <form action="/html" method="POST">
             <fieldset class="mainf">
                 <fieldset class="ff">
                     <div class="personal">
-                        <h2 id="sh"><b>1. Personal Information</b></h2>
-                        <br>
                         <p class="theory">Full Name:</p>
                         <input type="text" name="fullname" class="inputs" id="full_name" placeholder="Enter full name"
                             required>

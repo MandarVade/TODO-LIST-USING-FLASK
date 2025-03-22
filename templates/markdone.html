@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block heading %}
+    COMPLETED WORK
+{% endblock heading %}
+{% block mainy %}
+    <main>
+        <div class="datapart">
+            {% if entries|length==0 %}
+
+            NO ENTRIES
+
+            {% else %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>S.No</th>
+                        <th>Full Name</th>
+                        <th>Email ID</th>
+                        <th>Phone Number</th>
+                        <th>Time</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for entry in entries %}
+                    <tr>
+                        <th scope="row">{{ loop.index }}</th>
+                        <td>{{ entry.full_name }}</td>
+                        <td>{{ entry.email }}</td>
+                        <td>{{ entry.phone_number }}</td>
+                        <td>{{ entry.date_created }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% endif %}
+        </div>
+    </main>
+{% endblock mainy %}

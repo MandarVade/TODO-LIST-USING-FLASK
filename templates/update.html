@@ -2,6 +2,9 @@
 {% block title %}
     UPDATE
 {% endblock title %}
+{% block heading %}
+    UPDATE TODO LIST
+{% endblock heading %}
 {% block mainy %}
     <main>
         <form action="/update/{{entry.id}}" method="POST">
