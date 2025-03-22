@@ -1,40 +1,45 @@
-from flask import Flask,render_template,request
+from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI']="sqlite:///form.db"
+app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///form.db"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db=SQLAlchemy(app)
+db = SQLAlchemy(app)
 
 class form(db.Model):
-    sno=db.Column(db.Integer, primary_key=True)
-    fname=db.Column(db.String(100), nullable=False)
-    email=db.Column(db.String(100))
-    phno=db.Column(db.Integer)
-    date_created=db.Column(db.DateTime, default=datetime.utcnow)
-    def __repr__(self)->str:
-        return f"{self.fname} - {self.email} - {self.phno}"
+    id  = db.Column(db.Integer, primary_key=True)
+    full_name = db.Column(db.String(100), nullable=False)
+    email = db.Column(db.String(100), nullable=False, unique=True)
+    phone_number = db.Column(db.BigInteger, nullable=False, unique=True)
+    date_created = db.Column(db.DateTime, default=datetime.utcnow)
+
+    def __repr__(self):
+        return f"{self.full_name} - {self.email} - {self.phone_number}"
 
 @app.route("/")
-def hello_world():
+def home():
     return "<p>Hello, World!</p>"
 
-@app.route("/html",methods=['GET','POST'])
-def learnhtml():
-    if request.method=='POST':
-        # print("post")
-        title=request.form['fullname']
-        emailid=request.form['email']
-        pnum=request.form['phoneNo']
-        form1=form(fname=title,email=emailid,phno=pnum)
-        db.session.add(form1)
+@app.route("/html", methods=['GET', 'POST'])
+def form_page():
+    if request.method == 'POST':
+        full_name = request.form['fullname']
+        email = request.form['email']
+        phone_number = request.form['phoneNo']
+        new_entry = form(full_name=full_name, email=email, phone_number=phone_number)
+        db.session.add(new_entry)
         db.session.commit()
-    allform=form .query.all()
+    entries = form.query.all()
+    return render_template('index.html', entries=entries)
 
-    return render_template('index.html',myans=allform)
-@app.route("/show")
-def show():
-    # allform=form .query.all()
-    return"hello"
-if __name__== "__main__" :
+@app.route("/delete/<int:id>")
+def delete_entry(id):
+    entry = form.query.filter_by(id=id).first()
+    if entry:
+        db.session.delete(entry)
+        db.session.commit()
+    return redirect("/html")
+
+if __name__ == "__main__":
     app.run(debug=True)
