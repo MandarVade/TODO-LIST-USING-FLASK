@@ -47,19 +47,25 @@ def form_page():
         db.session.add(new_entry)
         db.session.commit()
     entries = form.query.all()
-    return render_template('index.html', entries=entries)
+    entriess = done.query.all()
+    return render_template('index.html', entries=entries, entriess=entriess)
 
-    
 @app.route("/markdone/<int:id>", methods=['GET', 'POST'])
 def markdone(id):
-    entry = form.query.filter_by(id=id).first()
-    if request.method == 'POST':
-        new_entry = done(done_name=entry.full_name, done_email=entry.email, done_phno=entry.phone_number)
-        db.session.add(new_entry)
-        db.session.delete(entry)
-        db.session.commit()
-    return redirect("/html")
-    
+    entry = form.query.filter_by(id=id).first()  # Ensure 'form' is your correct model
+    if not entry:
+        return "Task not found", 404 
+    new_entry = done(done_name=entry.full_name, done_email=entry.email, done_phno=entry.phone_number)
+    db.session.add(new_entry)
+    db.session.delete(entry)
+    db.session.commit()
+    return redirect("/html")  
+
+@app.route("/markdone")
+def markdone_list():
+    entriess = done.query.all()  
+    return render_template('markdone.html', entriess=entriess)
+ 
 @app.route("/delete/<int:id>")
 def delete_entry(id):
     entry = form.query.filter_by(id=id).first()

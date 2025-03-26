@@ -1,65 +1,67 @@
 {% extends 'base.html' %}
 {% block heading %}
-    TODO LIST
+TODO LIST
 {% endblock heading %}
 {% block mainy %}
-    <main>
-        <form action="/html" method="POST">
-            <fieldset class="mainf">
-                <fieldset class="ff">
-                    <div class="personal">
-                        <p class="theory">Full Name:</p>
-                        <input type="text" name="fullname" class="inputs" id="full_name" placeholder="Enter full name"
-                            required>
-                        <br>
-                        <p class="theory">Email Address:</p>
-                        <input class="inputs" type="email" name="email" id="email" placeholder="Enter email address"
-                            required>
-                        <br>
-                        <p class="theory">Phone Number:</p>
-                        <input type="tel" name="phoneNo" class="inputs" id="phone_number"
-                            placeholder="Enter mobile number" required>
-                    </div>
+<main>
+    <form action="/html" method="POST">
+        <fieldset class="mainf">
+            <fieldset class="ff">
+                <div class="personal">
+                    <p class="theory">Full Name:</p>
+                    <input type="text" name="fullname" class="inputs" id="full_name" placeholder="Enter full name"
+                        required>
                     <br>
-                    <button type="submit">SUBMIT</button>
-                </fieldset>
+                    <p class="theory">Email Address:</p>
+                    <input class="inputs" type="email" name="email" id="email" placeholder="Enter email address"
+                        required>
+                    <br>
+                    <p class="theory">Phone Number:</p>
+                    <input type="tel" name="phoneNo" class="inputs" id="phone_number" placeholder="Enter mobile number"
+                        required>
+                </div>
+                <br>
+                <button type="submit">SUBMIT</button>
             </fieldset>
-        </form>
-        <div class="datapart">
-            {% if entries|length==0 %}
-
-            NO ENTRIES
-
-            {% else %}
-            <table>
-                <thead>
-                    <tr>
-                        <th>S.No</th>
-                        <th>Full Name</th>
-                        <th>Email ID</th>
-                        <th>Phone Number</th>
-                        <th>Time</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for entry in entries %}
-                    <tr>
-                        <th scope="row">{{ loop.index }}</th>
-                        <td>{{ entry.full_name }}</td>
-                        <td>{{ entry.email }}</td>
-                        <td>{{ entry.phone_number }}</td>
-                        <td>{{ entry.date_created }}</td>
-                        <td class="btns">
-                            <button onclick="window.location.href='/update/{{ entry.id }}'">Edit</button>
-                            <button onclick="window.location.href='/delete/{{ entry.id }}'">Delete</button>
-                            <button onclick="window.location.href='/markdone/{{ entry.id }}'">Mark Done</button>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-            {% endif %}
-        </div>
-    </main>
+        </fieldset>
+    </form>
+    {% if entriess|length == 0 %}
+    {% else %}
+    <button onclick="window.location.href='/markdone'" type="submit">Checkout completed Task</button>
+    {% endif %}
+    <div class="datapart">
+        {% if entries|length==0 %}
+        NO ENTRIES
+        {% else %}
+        <table>
+            <thead>
+                <tr>
+                    <th>S.No</th>
+                    <th>Full Name</th>
+                    <th>Email ID</th>
+                    <th>Phone Number</th>
+                    <th>Time</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entry in entries %}
+                <tr>
+                    <th scope="row">{{ loop.index }}</th>
+                    <td>{{ entry.full_name }}</td>
+                    <td>{{ entry.email }}</td>
+                    <td>{{ entry.phone_number }}</td>
+                    <td>{{ entry.date_created }}</td>
+                    <td class="btns">
+                        <button onclick="window.location.href='/update/{{ entry.id }}'">Edit</button>
+                        <button onclick="window.location.href='/delete/{{ entry.id }}'">Delete</button>
+                        <button onclick="window.location.href='/markdone/{{ entry.id }}'">Mark Done</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+    </div>
+</main>
 {% endblock mainy %}
