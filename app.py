@@ -1,9 +1,6 @@
 from flask import Flask, render_template, request, redirect
-from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from datetime import datetime
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///database.db"
@@ -33,11 +30,7 @@ class done(db.Model):
 with app.app_context():
     db.create_all()
 
-@app.route("/")
-def home():
-    return "<p>Hello, World!</p>"
-
-@app.route("/html", methods=['GET', 'POST'])
+@app.route("/",methods=['GET', 'POST'])
 def form_page():
     if request.method == 'POST':
         full_name = request.form['fullname']
@@ -52,14 +45,14 @@ def form_page():
 
 @app.route("/markdone/<int:id>", methods=['GET', 'POST'])
 def markdone(id):
-    entry = form.query.filter_by(id=id).first()  # Ensure 'form' is your correct model
+    entry = form.query.filter_by(id=id).first()
     if not entry:
         return "Task not found", 404 
     new_entry = done(done_name=entry.full_name, done_email=entry.email, done_phno=entry.phone_number)
     db.session.add(new_entry)
     db.session.delete(entry)
     db.session.commit()
-    return redirect("/html")  
+    return redirect("/")  
 
 @app.route("/markdone")
 def markdone_list():
@@ -72,7 +65,7 @@ def delete_entry(id):
     if entry:
         db.session.delete(entry)
         db.session.commit()
-    return redirect("/html")
+    return redirect("/")
 
 @app.route("/update/<int:id>" ,methods=['GET', 'POST'])
 def update(id):
@@ -86,7 +79,7 @@ def update(id):
         entry.phone_number=phone_number
         db.session.add(entry)
         db.session.commit()
-        return redirect("/html")
+        return redirect("/")
     entry = form.query.filter_by(id=id).first()
     return render_template('update.html', entry=entry)
 
